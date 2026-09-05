@@ -65,30 +65,24 @@ def calculate_used_basic_time(timecontrol,time_left):
       basic_time = int(timecontrol[:plus_sign])
    else:
       basic_time = int(timecontrol)
-   print('Basic time: ' + str(basic_time))
    if time_left.find(":") != -1:
       white_first_sep = time_left.find(":")
       if time_left[white_first_sep + 1:].find(":") != -1:
          white_sec_sep = time_left[white_first_sep + 1:].find(":")
-         print('white_first_sep: ' + str(white_first_sep))
-         print('white_sec_sep: ' + str(white_sec_sep))
          hour_w = int(time_left[:white_first_sep])
          min_w = int(time_left[white_first_sep + 1:white_first_sep + white_sec_sep + 1])
          sec_w = int(time_left[white_first_sep + white_sec_sep + 2:])
       else:
-         print('Case 2: ')
-         print('White_first_sep: ' + str(white_first_sep))
          hour_w = 0
          min_w = int(time_left[:white_first_sep])
          sec_w = int(time_left[white_first_sep + 1:])
    else:
+      print('Case 3: ')
       hour_w = 0
       min_w = 0
       sec_w = int(time_left)
+      print('Seconds left' + str(time_left))
    time_used = basic_time - 3600 * hour_w - 60 * min_w - sec_w
-   print('Hours left: ' + str(hour_w))
-   print("Minutes left: " + str(min_w))
-   print("Seconds left: " + str(sec_w))
    return time_used
 
 # Function calculates how much time was added during increments
