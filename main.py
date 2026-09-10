@@ -68,23 +68,18 @@ dt_end = convert_to_datetime(date_game, endtime_game)
 
 # Calculating number of moves for white and black
 num_moves = find_number_of_moves(input_pgn_list)
-print(str(num_moves))
 
 # Calculate basic time for white player
 w_basic_time_used = calculate_used_basic_time(timecontrol, white_left)
-print('Basic time used for white player: ' + str(w_basic_time_used))
+
 # Calculate basic time for black player
 b_basic_time_used = calculate_used_basic_time(timecontrol, black_left)
-print('Basic time used for black player: ' + str(b_basic_time_used))
-# Calculate used increment time (added) for white player
 
 # Calculate added time for white player
 w_increment_time_added = calculate_used_increment_time(timecontrol, num_moves[0])
-print("Added time for white: " + str(w_increment_time_added))
 
 # Calculate added time for black player
 b_increment_time_added = calculate_used_increment_time(timecontrol, num_moves[1])
-print("Added time for black: " + str(b_increment_time_added))
 
 # Calculate total used time - basic and added
 wb_total_used_time = w_basic_time_used + b_basic_time_used + w_increment_time_added + b_increment_time_added
