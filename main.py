@@ -83,18 +83,16 @@ b_increment_time_added = calculate_used_increment_time(timecontrol, num_moves[1]
 
 # Calculate total used time - basic and added
 wb_total_used_time = w_basic_time_used + b_basic_time_used + w_increment_time_added + b_increment_time_added
-print("Total calculated time of game: " + str(wb_total_used_time))
 
 # Calculate game begin time and convert it to specific timezone
 dt_begin = dt_end - timedelta(seconds = wb_total_used_time)
 dt_begin_converted = dt_begin.astimezone(ZoneInfo('Europe/Warsaw'))
-print("Begin game: " + str(dt_begin_converted))
 
 # Select ECO code tag from .pgn file
 eco_code = get_tag_from_pgn(input_pgn_list, "ECO")
+
 # Select result from "Result" tag within .pgn
 fin_result = get_result(input_pgn_list)
-print("Result:" + str(fin_result))
 
 # Building output filename
 year_fn = dt_begin_converted.strftime("%Y")
@@ -105,11 +103,9 @@ minute_fn = dt_begin_converted.strftime("%M")
 second_fn = dt_begin_converted.strftime("%S")
 
 output_filename = file_prefix + "_" + year_fn + month_fn + day_fn + "_" + hour_fn + minute_fn + second_fn + "_" + w_player + "_" + b_player + "_" + eco_code + "_" + fin_result + ".pgn"
-print("Output filename: " + output_filename)
 
 # Calculate line where chess game scores begins within .pgn file
 start_line = calculate_begin_line(input_pgn_list)
-print("Begin line: " + str(start_line))
 
 # Create list composed of single moves
 single_moves_list = create_list_with_single_moves(input_pgn_list, start_line, num_moves[0])

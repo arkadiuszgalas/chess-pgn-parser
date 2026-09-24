@@ -13,8 +13,13 @@ def get_tag_from_pgn(input_list,tag):
 
 # Function coverts date and hour strings into datetime format with GMT+0000 timezone
 def convert_to_datetime(date_str, hour_str):
+   hour_str_one = hour_str.find(":")
+   hours_end_time = hour_str[0:hour_str_one]
+   minutes_end_time = hour_str[hour_str_one + 1:hour_str_one + 3]
+   seconds_end_time = hour_str[hour_str_one + 4:hour_str_one + 6]
+
    dt_converted = datetime(int(date_str[0:4]), int(date_str[5:7]), int(date_str[8:]),
-                           int(hour_str[0:2]), int(hour_str[3:5]), int(hour_str[6:8]), tzinfo=ZoneInfo('UTC'))
+                           int(hours_end_time), int(minutes_end_time), int(seconds_end_time), tzinfo=ZoneInfo('UTC'))
    return dt_converted
 
 # Function calculates number of moves for white and black player
@@ -124,20 +129,15 @@ def create_list_with_single_moves(pgn_list, begin_line, number_moves):
    list_single_moves = []
    for i in range(begin_line, len(pgn_list)):
       full_game_string = full_game_string + str(pgn_list[i])
-   print(full_game_string)
 
    for i in range(1, number_moves + 1):
       if i < number_moves:
          move_start = full_game_string.index(str(i) + '.')
          move_end = full_game_string.index(str(i + 1) + '.')
          move = full_game_string[move_start:move_end]
-         print("Move: " + str(move) + "\n")
          list_single_moves.append(move)
       else:
          move_start = full_game_string.index(str(i) + '.')
          move = full_game_string[move_start:]
          list_single_moves.append(move)
-         print("Last move: " + str(move) + "\n")
-
-   print("list_single_moves: " + str(list_single_moves))
    return list_single_moves
