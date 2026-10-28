@@ -82,11 +82,9 @@ def calculate_used_basic_time(timecontrol,time_left):
          min_w = int(time_left[:white_first_sep])
          sec_w = int(time_left[white_first_sep + 1:])
    else:
-      print('Case 3: ')
       hour_w = 0
       min_w = 0
       sec_w = int(time_left)
-      print('Seconds left' + str(time_left))
    time_used = basic_time - 3600 * hour_w - 60 * min_w - sec_w
    return time_used
 
@@ -134,10 +132,10 @@ def create_list_with_single_moves(pgn_list, begin_line, number_moves):
       if i < number_moves:
          move_start = full_game_string.index(str(i) + '.')
          move_end = full_game_string.index(str(i + 1) + '.')
-         move = full_game_string[move_start:move_end]
+         move = full_game_string[move_start:move_end].strip()
          list_single_moves.append(move)
       else:
          move_start = full_game_string.index(str(i) + '.')
-         move = full_game_string[move_start:]
+         move = full_game_string[move_start:].strip()
          list_single_moves.append(move)
    return list_single_moves
